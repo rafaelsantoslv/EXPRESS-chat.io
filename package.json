@@ -1,0 +1,11 @@
+{
+  "name": "express-chat.io",
+  "version": "1.0.0",
+  "description": "Projeto de chat criado com express e socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafael dos Santos Batista",
+  "license": "ISC"
+}
