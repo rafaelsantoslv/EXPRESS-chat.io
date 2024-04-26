@@ -4,8 +4,33 @@
   "description": "Projeto de chat criado com express e socket.io",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "paths": {
+    "@controllers/*": [
+      "src/controllers/*"
+    ],
+    "@models/*": [
+      "src/models/*"
+    ],
+    "@routes/*": [
+      "src/routes/*"
+    ]
   },
   "author": "Rafael dos Santos Batista",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
