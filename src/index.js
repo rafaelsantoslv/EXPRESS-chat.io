@@ -1,23 +1,25 @@
+// BIBLIOTECAS
 const express = require('express');
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 
+//CONFIGURAÇÕES
 require("dotenv/config");
 require("./lib/moduleAliases");
+require("./database/index")
 
+// INICIA APP
 const app = express();
-const routes = require("@routes/routes.js");
-// const teste = require("@controllers/loginController");
-// console.log(teste)
+app.use(bodyParser.json())
+
+// ROTAS
+const Routes = require("@routes/routes.js");
+app.use(Routes)
 
 
+// MONTA BIBLIOTECAS
 app.use(cors())
-app.use(express.json())
-app.use(routes)
-app.use(express.static(path.join(__dirname, "app", "public")));
-
-
 
 try {
     app.listen(process.env.SERVER_PORT || 6161);
