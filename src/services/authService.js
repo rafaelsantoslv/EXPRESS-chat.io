@@ -2,6 +2,7 @@ const tabUsers = require('@models/usuariosModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+
 const authService = {
   async signIn(email, senha) {
     const user = await tabUsers.findOne({ where: { email } })
