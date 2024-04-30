@@ -1,61 +1,26 @@
-const tabUsers = require("@models/usuariosModel")
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const auth = async (req, res) => {
-    const {email, senha} = req.body
+const tabUsers = require('@models/usuariosModel')
+const authService = require('@services/authService.js')
 
+const authController = {
+  async signIn(req, res) {
     try {
-        const user = await tabUsers.findOne({ where: { email } });
-
-    if (!user) {
-        return res.status(401).json({ message: "Usuário não encontrado" });
-    }
-
-    const decryptSenha = await bcrypt.compare(senha, user.senha);
-
-    if (!decryptSenha) {
-        return res.status(401).json({ message: "Senha incorreta" });
-    }
-
-    const token = jwt.sign(
-        { userID: user.id, email: user.email },
-        process.env.JSONWEBTOKEN_SECRET,
-        { expiresIn: "30m" }
-    );
-
-    return res.status(200).json({ message: "Logado com Sucesso", token });
-
+      const { email, senha } = req.body
+      const login = await authService.signIn(email, senha)
+      res.status(201).json(login)
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+      res.status(400).json({ message: error.message })
     }
-}
+  },
 
-const register = async (req, res) => {
-    const {email, nome, senha} = req.body
-
+  async signUp(req, res) {
     try {
-
-        const encryptSenha = await bcrypt.hash(senha, 10)
-
-        const [user, created] = await tabUsers.findOrCreate({
-            where: {email},
-            defaults: {nome, email, senha: encryptSenha}
-        })
-        res.status(200).json({message: created})
-        console.log(user, created)
-
-
+      const { email, nome, senha } = req.body
+      const register = await authService.signUp(email, nome, senha)
+      res.status(200).json(register)
     } catch (error) {
-        console.log(error)
-        res.status(401).json({message: error})
+      res.status(400).json({ message: error.message })
     }
+  }
 }
 
-
-
-module.exports = {
-    auth,
-    register
-}
-
+module.exports = authController

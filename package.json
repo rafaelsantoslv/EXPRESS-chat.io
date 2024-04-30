@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/index.js"
+    "start": "nodemon ./src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
   },
   "paths": {
     "@controllers/*": [
@@ -34,14 +37,12 @@
     "socket.io": "^4.7.5"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.0.2",
     "@eslint/js": "^9.1.1",
-    "eslint": "^8.57.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.1.1",
-    "globals": "^15.0.0",
-    "jest": "^29.7.0"
+    "eslint": "^9.1.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "globals": "^15.1.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5"
   }
 }
