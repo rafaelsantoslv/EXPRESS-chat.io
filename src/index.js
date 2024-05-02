@@ -29,15 +29,19 @@ app.set('view engine', 'html')
 const server = http.createServer(app);
 const io = socketIo(server);
 
+let messages = []
+
 io.on("connection", (socket) => {
   console.log("Novo cliente conectado " + socket.id);
 
   socket.on('sendMessage', data => {
-    console.log(data)
+    messages.push(data)
+    socket.broadcast.emit('receivedMessage', data)
+
   })
 });
 
-server.listen(process.env.SERVER_PORT || 6161, () => {
+server.listen(process.env.SERVER_PORT || 6161, '0.0.0.0', () => {
   console.log(
     `[SERVER] ${process.env.SERVER_NAME} ONLINE NA PORTA ${process.env.SERVER_PORT}`
   );
