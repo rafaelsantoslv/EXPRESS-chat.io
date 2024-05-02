@@ -1,7 +1,7 @@
-const tabUsers = require('@models/usuariosModel')
+// const tabUsers = require('@models/usuariosModel')
 const authService = require('@services/authService.js')
-const { validateAuth } = require("@middleware/authMiddleware.js")
-const { body, validationResult } = require("express-validator");
+// const { validateAuth } = require("@middleware/authMiddleware.js")
+const { validationResult } = require("express-validator");
 
 
 const authController = {
